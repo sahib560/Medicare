@@ -1,0 +1,2486 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="MediCare - Quality healthcare and specialist doctors. Book appointments online." />
+    <title>MediCare | Quality Healthcare & Appointments</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Animate.css for subtle entrance animations -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
+
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="./assets/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+      :root {
+        --brand: #0d6efd;
+        --brand-dark: #0b5ed7;
+        --text-muted: #6c757d;
+        --surface: #ffffff;
+      }
+
+      html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+      body { background-color: #f8fafc; padding-top: 72px; }
+
+      /* Navbar */
+      #mainNavbar .nav-link {
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #2d4063;
+  position: relative;
+  transition: color .2s ease, background .2s;
+  border-radius: 24px;
+  margin: 0 2px;
+}
+#mainNavbar .nav-link.active, #mainNavbar .nav-link:hover {
+  color: #1976d2;
+  background: rgba(25,118,210,0.07);
+}
+#mainNavbar .nav-link:focus {
+  color: #15203c;
+  outline: 0;
+  background: rgba(25,118,210,0.09);
+}
+
+      #mainNavbar .nav-link.active, #mainNavbar .nav-link:hover { color: var(--brand); }
+      #mainNavbar .nav-link:focus { color: var(--brand-dark); }
+      #mainNavbar .nav-link:focus-visible { outline: none; }
+      #mainNavbar .nav-link::after {
+        content: '';
+        position: absolute;
+        left: 0.75rem;
+        right: 0.75rem;
+        bottom: 0.35rem;
+        height: 2px;
+        background: var(--brand);
+        border-radius: 2px;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .25s ease;
+      }
+      #mainNavbar .nav-link:hover::after,
+      #mainNavbar .nav-link:focus::after,
+      #mainNavbar .nav-link.active::after { transform: scaleX(1); }
+      /* Ensure navbar stays above hero overlays/images */
+      #mainNavbar { z-index: 1200; }
+
+      /* Hero */
+      .hero {
+        min-height: 88vh;
+        background-image: url('img/Gemini_Generated_Image_6wcxqx6wcxqx6wcx.png');
+        background-size: cover;
+        background-position: center;
+      }
+      .hero .overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,14,29,0.55) 0%, rgba(7,14,29,0.35) 50%, rgba(7,14,29,0.55) 100%); z-index: 0; pointer-events: none; }
+
+      /* Icons */
+      .icon-wrap { width: 56px; height: 56px; display: inline-flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 1.4rem; }
+
+      /* --- Improved Card Styles --- */
+      .card {
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px 0 rgba(25,118,210,.07), 0 1.5px 6px 0 rgba(0,0,0,0.03);
+  border: none;
+  background: linear-gradient(140deg, #f8fafc 75%, #e9f0fb 100%);
+  transition: box-shadow .24s cubic-bezier(.25,.46,.45,.94), transform .18s cubic-bezier(.25,.46,.45,.94);
+}
+.card:hover {
+  box-shadow: 0 8px 36px rgba(25,118,210,.20), 0 3px 10px rgba(0,0,0,.09);
+  transform: translateY(-3px) scale(1.03);
+}
+.card-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #1976d2;
+}
+.card-body {
+  padding: 2rem 1.35rem 1.5rem 1.35rem;
+}
+
+      /* Professional, subtle baseline style for frequently clickable cards */
+      .service-card, .doctor-card {
+        transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+        box-shadow: 0 2px 12px rgba(13,110,253,0.06), 0 1px 4px rgba(0,0,0,0.06);
+        border: 1px solid rgba(13,110,253,0.06);
+        background: #fff;
+      }
+      /* Apply professional hover to all cards */
+      .card:hover {
+        transform: translateY(-2px) scale(1.01);
+        box-shadow: 0 6px 18px rgba(13,110,253,0.12), 0 3px 8px rgba(0,0,0,0.08);
+      }
+      .card-title {
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        color: #0d6efd;
+      }
+      .card-body {
+        padding: 2rem 1.5rem 1.5rem 1.5rem;
+      }
+      .doctor-card img, .service-card img {
+        border-radius: 1rem 1rem 0 0;
+        border-bottom: 2px solid #e9f0fb;
+      }
+      .doctor-card .card-title, .service-card .card-title {
+        font-size: 1.2rem;
+        margin-bottom: 0.25rem;
+      }
+      .doctor-card .badge, .service-card .badge {
+        font-size: 0.85rem;
+        background: #e9f0fb;
+        color: #0d6efd;
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      /* --- Section Improvements --- */
+      section {
+  margin-bottom: 3.5rem;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 16px 0 rgba(25,118,210,.05);
+}
+      section:not(:last-child) {
+        border-bottom: 1px solid #e9ecef;
+      }
+      .section-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        letter-spacing: 0.01em;
+        color: #0d6efd;
+        margin-bottom: 0.5rem;
+      }
+      /* --- Button Improvements --- */
+      .btn-primary, .btn-outline-primary {
+  border-radius: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  background: linear-gradient(94deg, #1976d2 70%, #43e97b 110%);
+  color: #fff;
+  transition: background .21s, color .17s, box-shadow .21s, transform .19s;
+  box-shadow: 0 2px 15px 0 rgba(25,118,210,0.11);
+  border: none;
+}
+
+      .btn-primary:hover, .btn-outline-primary:hover {
+        background: linear-gradient(90deg, #0d6efd 80%, #0b5ed7 100%);
+        color: #fff;
+        box-shadow: 0 4px 16px 0 rgba(13, 110, 253, 0.16);
+      }
+      /* --- Typography Improvements --- */
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+      body, p, .card-text, .text-muted {
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  font-size: 1.08rem;
+  color: #212529;
+  line-height: 1.8;
+}
+      /* --- Interesting Section Backgrounds --- */
+      #health-blog, #doctor-availability, #my-medical-records {
+        background: linear-gradient(120deg, #f8fafc 80%, #e9f0fb 100%);
+      }
+      #services {
+        background: linear-gradient(120deg, #e9f0fb 60%, #f8fafc 100%);
+      }
+      /* --- Divider --- */
+      .section-divider {
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #0d6efd 60%, #0b5ed7 100%);
+        border-radius: 2px;
+        margin: 1.5rem auto 2rem auto;
+      }
+
+      /* Back to top */
+      .back-to-top { position: fixed; right: 18px; bottom: 18px; width: 48px; height: 48px; display: none; align-items: center; justify-content: center; z-index: 1080; box-shadow: 0 .5rem 1rem rgba(0,0,0,.15); }
+      .back-to-top.show { display: inline-flex; }
+
+      /* Footer */
+      footer a:hover { color: var(--brand) !important; }
+
+      /* --- Animations & Interactivity --- */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(.21,.65,.51,1), transform 0.7s cubic-bezier(.21,.65,.51,1);
+}
+.fade-up.active {
+  opacity: 1;
+  transform: none;
+}
+
+/* Newsletter */
+      #newsletter .form-control { height: 56px; outline: solid 0.4px; }
+      #newsletter .btn { height: 56px; width: 150px; }
+
+      /* --- Appointment Section Theming --- */
+      #appointment .card { border-radius: 1.25rem; }
+      #appointment .card .card-body { padding: 2rem; }
+      #appointment .form-label { font-weight: 600; color: #0d6efd; }
+      #appointment .input-group-text {
+        background: #ecf3ff;
+        border-color: #d9e6ff;
+        color: #0d6efd;
+        border-radius: 0.75rem 0 0 0.75rem;
+      }
+      #appointment .form-control, #appointment .form-select, #appointment textarea {
+        border-radius: 0.75rem;
+        border-color: #e3e9f3;
+      }
+      #appointment .form-control:focus, #appointment .form-select:focus, #appointment textarea:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 .25rem rgba(13,110,253,.15);
+      }
+      #appointment .helper-text { font-size: .9rem; color: var(--text-muted); }
+
+      /* Reduce hover motion on touch devices */
+      @media (hover: none) {
+        .card:hover { transform: none; box-shadow: inherit; }
+      }
+
+      
+    </style>
+  </head>
+  <body data-bs-spy="scroll" data-bs-target="#mainNavbar" data-bs-offset="80" tabindex="0">
+    <!-- Navbar -->
+    <nav id="mainNavbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+      <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="#home">
+          <i class="bi bi-hospital me-2 text-primary"></i>
+          <span>MediCare</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="#doctors">Doctors</a></li>
+            <li class="nav-item"><a class="nav-link" href="#appointment">Appointment</a></li>
+            <li class="nav-item"><a class="nav-link" href="#health-blog">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          </ul>
+          <a href="#appointment" class="btn btn-primary btn-sm ms-2 d-none d-lg-inline-flex align-items-center" style="border-radius:24px; font-size:0.97rem; padding:0.35rem 1rem; font-weight:500;"><i class="bi bi-calendar-check me-1"></i>Book</a>
+          <div id="authArea" class="d-inline-block ms-lg-3"></div>
+          <button id="emergencyBtn" class="btn btn-danger btn-sm ms-2 d-inline-flex align-items-center justify-content-center" style="border-radius:50%; width:34px; height:34px; font-size:1.13rem; padding:0; border:none; box-shadow:0 1px 6px 0 rgba(220,53,69,0.11);" title="Emergency Support"><i class="bi bi-exclamation-triangle-fill"></i></button>
+        </div>
+      </div>
+    </nav>
+
+
+    <!-- Hero -->
+    <header id="home" class="hero d-flex align-items-center">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <h1 class="display-4 fw-bold text-white animate__animated animate__fadeInUp">
+          Compassionate Care, Modern Medicine
+        </h1>
+        <p class="lead text-white-50 mt-3 animate__animated animate__fadeInUp animate__delay-1s">
+          Trusted hospital and specialist doctors dedicated to your health and well-being.
+        </p>
+        <div class="mt-4 animate__animated animate__fadeInUp animate__delay-2s">
+          <a href="#appointment" class="btn btn-primary btn-lg me-3">
+            <i class="bi bi-calendar-check me-2"></i>Book Appointment
+          </a>
+          <a href="#services" class="btn btn-outline-light btn-lg">
+            <i class="bi bi-info-circle me-2"></i>Our Services
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+
+
+    <!-- Stats -->
+    <section id="stats" class="py-5 bg-white">
+      <div class="container">
+        <div class="row text-center g-4">
+          <div class="col-12 col-md-4" data-aos="fade-up">
+            <div class="display-5 fw-bold text-primary">
+              <span class="countup" data-target="10000"></span>+
+            </div>
+            <div class="text-muted">Patients Served</div>
+          </div>
+          <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="display-5 fw-bold text-primary">
+              <span class="countup" data-target="65"></span>
+            </div>
+            <div class="text-muted">Departments</div>
+          </div>
+          <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="display-5 fw-bold text-primary">
+              <span class="countup" data-target="400"></span>
+            </div>
+            <div class="text-muted">Doctors</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-5 bg-light">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="fw-bold section-title" data-aos="fade-up">Our Services</h2>
+            <div class="section-divider"></div>
+            <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+              Comprehensive healthcare services using the latest medical technology.
+            </p>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+            <a href="service-details.html?id=cardiology" class="text-decoration-none text-dark">
+            <div class="card service-card h-100">
+              <div class="card-body">
+                <div class="icon-wrap bg-primary-subtle text-primary mb-3">
+                  <i class="bi bi-heart-pulse"></i>
+                </div>
+                <h5 class="card-title">Cardiology</h5>
+                <p class="card-text text-muted">Advanced heart diagnostics and treatments by experienced cardiologists.</p>
+              </div>
+            </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <a href="service-details.html?id=general-medicine" class="text-decoration-none text-dark">
+            <div class="card service-card h-100">
+              <div class="card-body">
+                <div class="icon-wrap bg-primary-subtle text-primary mb-3">
+                  <i class="bi bi-activity"></i>
+                </div>
+                <h5 class="card-title">General Medicine</h5>
+                <p class="card-text text-muted">Comprehensive primary care and preventive health services for all ages.</p>
+              </div>
+            </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <a href="service-details.html?id=pharmacy" class="text-decoration-none text-dark">
+            <div class="card service-card h-100">
+              <div class="card-body">
+                <div class="icon-wrap bg-primary-subtle text-primary mb-3">
+                  <i class="bi bi-capsule"></i>
+                </div>
+                <h5 class="card-title">Pharmacy</h5>
+                <p class="card-text text-muted">On-site pharmacy with expert pharmacists and quick service.</p>
+              </div>
+            </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+            <a href="service-details.html?id=laboratory" class="text-decoration-none text-dark">
+            <div class="card service-card h-100">
+              <div class="card-body">
+                <div class="icon-wrap bg-primary-subtle text-primary mb-3">
+                  <i class="bi bi-eyedropper"></i>
+                </div>
+                <h5 class="card-title">Laboratory</h5>
+                <p class="card-text text-muted">Accurate lab tests with fast turnaround for informed decisions.</p>
+              </div>
+            </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+            <a href="service-details.html?id=radiology" class="text-decoration-none text-dark">
+            <div class="card service-card h-100">
+              <div class="card-body">
+                <div class="icon-wrap bg-primary-subtle text-primary mb-3">
+                  <i class="bi bi-bezier2"></i>
+                </div>
+                <h5 class="card-title">Radiology</h5>
+                <p class="card-text text-muted">MRI, CT, and X-ray imaging with expert radiologists.</p>
+              </div>
+            </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+            <a href="service-details.html?id=emergencycare" class="text-decoration-none text-dark">
+            <div class="card service-card h-100">
+              <div class="card-body">
+                <div class="icon-wrap bg-primary-subtle text-primary mb-3">
+                  <i class="bi bi-bandaid"></i>
+                </div>
+                <h5 class="card-title">Emergency Care</h5>
+                <p class="card-text text-muted">24/7 emergency services with rapid response teams.</p>
+              </div>
+            </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Doctors -->
+    <section id="doctors" class="py-5">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="fw-bold section-title" data-aos="fade-up">Our Doctors</h2>
+            <div class="section-divider"></div>
+            <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+              Meet our experienced and compassionate medical professionals.
+            </p>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-sm-6 col-lg-3" data-aos="zoom-in" data-aos-delay="0">
+            <div class="card doctor-card h-100 text-center shadow-lg" data-bs-toggle="modal" data-bs-target="#doctorModalEmily" style="cursor: pointer;">
+              <img src="img/pexels-rdne-6129112.jpg" class="card-img-top" alt="Doctor portrait" />
+              <div class="card-body">
+                <h5 class="card-title mb-0">Dr. Emily Carter</h5>
+                <small class="text-primary">Cardiologist</small>
+                <div class="mt-3 d-flex justify-content-center gap-3">
+                  <a href="#" class="text-muted hover-primary" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                  <a href="#" class="text-muted hover-primary" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                  <a href="#" class="text-muted hover-primary" aria-label="Email"><i class="bi bi-envelope"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+            <div class="card doctor-card h-100 text-center shadow-lg" data-bs-toggle="modal" data-bs-target="#doctorModalMichael" style="cursor: pointer;">
+              <img src="img/pexels-tima-miroshnichenko-8376142.jpg" class="card-img-top" alt="Doctor portrait" />
+              <div class="card-body">
+                <h5 class="card-title mb-0">Dr. Michael Lee</h5>
+                <small class="text-primary">Radiologist</small>
+                <div class="mt-3 d-flex justify-content-center gap-3">
+                  <a href="#" class="text-muted hover-primary" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                  <a href="#" class="text-muted hover-primary" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                  <a href="#" class="text-muted hover-primary" aria-label="Email"><i class="bi bi-envelope"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+            <div class="card doctor-card h-100 text-center shadow-lg" data-bs-toggle="modal" data-bs-target="#doctorModalSophia" style="cursor: pointer;">
+              <img src="img/pexels-tima-miroshnichenko-8376277.jpg" class="card-img-top" alt="Doctor portrait" />
+              <div class="card-body">
+                <h5 class="card-title mb-0">Dr. Sophia Patel</h5>
+                <small class="text-primary">Pediatrician</small>
+                <div class="mt-3 d-flex justify-content-center gap-3">
+                  <a href="#" class="text-muted hover-primary" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                  <a href="#" class="text-muted hover-primary" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                  <a href="#" class="text-muted hover-primary" aria-label="Email"><i class="bi bi-envelope"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
+            <div class="card doctor-card h-100 text-center shadow-lg" data-bs-toggle="modal" data-bs-target="#doctorModalDaniel" style="cursor: pointer;">
+              <img src="img/pexels-edward-jenner-4033148.jpg" class="card-img-top" alt="Doctor portrait" />
+              <div class="card-body">
+                <h5 class="card-title mb-0">Dr. Daniel Kim</h5>
+                <small class="text-primary">Surgeon</small>
+                <div class="mt-3 d-flex justify-content-center gap-3">
+                  <a href="#" class="text-muted hover-primary" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                  <a href="#" class="text-muted hover-primary" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                  <a href="#" class="text-muted hover-primary" aria-label="Email"><i class="bi bi-envelope"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Doctor Availability Calendar -->
+    <section id="doctor-availability" class="py-5 bg-white">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="fw-bold section-title" data-aos="fade-up">Doctor Availability Calendar</h2>
+            <div class="section-divider"></div>
+            <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+              See which doctors are available on which dates. For up-to-date availability, please contact reception or book online.
+            </p>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="table-responsive" data-aos="fade-up">
+              <table class="table table-bordered align-middle text-center">
+                <thead class="table-primary">
+                  <tr>
+                    <th>Doctor</th>
+                    <th>Specialty</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Dr. Emily Carter</td>
+                    <td>Cardiologist</td>
+                    <td class="table-success">9am-1pm</td>
+                    <td class="table-success">9am-1pm</td>
+                    <td></td>
+                    <td class="table-success">9am-1pm</td>
+                    <td></td>
+                    <td class="table-success">10am-2pm</td>
+                  </tr>
+                  <tr>
+                    <td>Dr. Michael Lee</td>
+                    <td>Radiologist</td>
+                    <td></td>
+                    <td class="table-success">2pm-6pm</td>
+                    <td class="table-success">2pm-6pm</td>
+                    <td></td>
+                    <td class="table-success">2pm-6pm</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Dr. Sophia Patel</td>
+                    <td>Pediatrician</td>
+                    <td class="table-success">10am-2pm</td>
+                    <td></td>
+                    <td class="table-success">10am-2pm</td>
+                    <td class="table-success">10am-2pm</td>
+                    <td></td>
+                    <td class="table-success">10am-1pm</td>
+                  </tr>
+                  <tr>
+                    <td>Dr. Daniel Kim</td>
+                    <td>Surgeon</td>
+                    <td></td>
+                    <td class="table-success">11am-3pm</td>
+                    <td></td>
+                    <td class="table-success">11am-3pm</td>
+                    <td class="table-success">11am-3pm</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Doctor Detail Modals -->
+    <!-- Dr. Emily Carter Modal -->
+    <div class="modal fade" id="doctorModalEmily" tabindex="-1" aria-labelledby="doctorModalEmilyLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+          <div class="modal-header bg-primary text-white border-0">
+            <h5 class="modal-title fw-bold" id="doctorModalEmilyLabel">
+              <i class="bi bi-person-circle me-2"></i>Dr. Emily Carter - Cardiologist
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-0">
+            <div class="row g-0">
+              <div class="col-md-5">
+                <img src="img/pexels-rdne-6129112.jpg" class="img-fluid rounded-start h-100" alt="Dr. Emily Carter" style="object-fit: cover; min-height: 400px;">
+              </div>
+              <div class="col-md-7 p-4">
+                <div class="mb-4">
+                  <h4 class="fw-bold text-primary mb-3">About Dr. Emily Carter</h4>
+                  <p class="text-muted mb-3">Dr. Emily Carter is a board-certified cardiologist with over 12 years of experience in cardiovascular medicine. She specializes in preventive cardiology, heart failure management, and interventional cardiology procedures.</p>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-mortarboard-fill me-2"></i>Education</h6>
+                  <ul class="list-unstyled mb-3">
+                    <li><strong>MD - Doctor of Medicine</strong><br><small class="text-muted">Harvard Medical School, Boston, MA (2008-2012)</small></li>
+                    <li><strong>Residency in Internal Medicine</strong><br><small class="text-muted">Massachusetts General Hospital, Boston, MA (2012-2015)</small></li>
+                    <li><strong>Fellowship in Cardiology</strong><br><small class="text-muted">Brigham and Women's Hospital, Boston, MA (2015-2018)</small></li>
+                    <li><strong>Interventional Cardiology Fellowship</strong><br><small class="text-muted">Cleveland Clinic, Cleveland, OH (2018-2019)</small></li>
+                  </ul>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-award-fill me-2"></i>Certifications</h6>
+                  <div class="mb-3">
+                    <span class="badge bg-primary me-2 mb-1">Board Certified in Cardiovascular Disease</span>
+                    <span class="badge bg-primary me-2 mb-1">Board Certified in Interventional Cardiology</span>
+                    <span class="badge bg-primary me-2 mb-1">Echocardiography Certified</span>
+                    <span class="badge bg-success me-2 mb-1">ACLS Certified</span>
+                  </div>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-briefcase-fill me-2"></i>Experience</h6>
+                  <p class="mb-3">12+ years of clinical experience | 5000+ successful procedures</p>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-star-fill me-2"></i>Specialties</h6>
+                  <ul class="list-unstyled mb-3">
+                    <li>• Preventive Cardiology & Risk Assessment</li>
+                    <li>• Heart Failure Management</li>
+                    <li>• Coronary Artery Disease Treatment</li>
+                    <li>• Cardiac Catheterization & Stenting</li>
+                    <li>• Echocardiography & Cardiac Imaging</li>
+                  </ul>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-translate me-2"></i>Languages</h6>
+                  <p class="mb-3">English (Native), Spanish (Conversational)</p>
+
+                  <div class="border-top pt-3">
+                    <h6 class="fw-bold text-primary mb-2"><i class="bi bi-telephone-fill me-2"></i>Contact Information</h6>
+                    <p class="mb-1"><strong>Phone:</strong> +92-319-481-4055</p>
+                    <p class="mb-1"><strong>Email:</strong> emily.carter@medicare.com</p>
+                    <p class="mb-0"><strong>Office Hours:</strong> Mon, Wed, Fri: 9:00 AM - 1:00 PM</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer border-0 bg-light">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            <a href="#appointment" class="btn btn-primary" data-bs-dismiss="modal">
+              <i class="bi bi-calendar-plus me-2"></i>Book Appointment
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dr. Michael Lee Modal -->
+    <div class="modal fade" id="doctorModalMichael" tabindex="-1" aria-labelledby="doctorModalMichaelLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+          <div class="modal-header bg-primary text-white border-0">
+            <h5 class="modal-title fw-bold" id="doctorModalMichaelLabel">
+              <i class="bi bi-person-circle me-2"></i>Dr. Michael Lee - Radiologist
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-0">
+            <div class="row g-0">
+              <div class="col-md-5">
+                <img src="img/pexels-tima-miroshnichenko-8376142.jpg" class="img-fluid rounded-start h-100" alt="Dr. Michael Lee" style="object-fit: cover; min-height: 400px;">
+              </div>
+              <div class="col-md-7 p-4">
+                <div class="mb-4">
+                  <h4 class="fw-bold text-primary mb-3">About Dr. Michael Lee</h4>
+                  <p class="text-muted mb-3">Dr. Michael Lee is a highly skilled diagnostic radiologist with 10 years of experience in advanced medical imaging. He specializes in MRI, CT, ultrasound, and interventional radiology procedures.</p>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-mortarboard-fill me-2"></i>Education</h6>
+                  <ul class="list-unstyled mb-3">
+                    <li><strong>MD - Doctor of Medicine</strong><br><small class="text-muted">Johns Hopkins University School of Medicine, Baltimore, MD (2010-2014)</small></li>
+                    <li><strong>Residency in Radiology</strong><br><small class="text-muted">Mayo Clinic, Rochester, MN (2014-2018)</small></li>
+                    <li><strong>Fellowship in Interventional Radiology</strong><br><small class="text-muted">Stanford University Medical Center, Stanford, CA (2018-2019)</small></li>
+                    <li><strong>MBA in Healthcare Administration</strong><br><small class="text-muted">University of Pennsylvania, Philadelphia, PA (2020-2022)</small></li>
+                  </ul>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-award-fill me-2"></i>Certifications</h6>
+                  <div class="mb-3">
+                    <span class="badge bg-primary me-2 mb-1">Board Certified in Diagnostic Radiology</span>
+                    <span class="badge bg-primary me-2 mb-1">Board Certified in Interventional Radiology</span>
+                    <span class="badge bg-primary me-2 mb-1">CAQ in Interventional Radiology</span>
+                    <span class="badge bg-success me-2 mb-1">ACLS Certified</span>
+                  </div>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-briefcase-fill me-2"></i>Experience</h6>
+                  <p class="mb-3">10+ years of clinical experience | 8000+ imaging studies interpreted</p>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-star-fill me-2"></i>Specialties</h6>
+                  <ul class="list-unstyled mb-3">
+                    <li>• Advanced MRI & CT Imaging</li>
+                    <li>• Interventional Radiology Procedures</li>
+                    <li>• Musculoskeletal Imaging</li>
+                    <li>• Neuroradiology</li>
+                    <li>• Vascular Imaging & Interventions</li>
+                  </ul>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-translate me-2"></i>Languages</h6>
+                  <p class="mb-3">English (Native), Korean (Native), Mandarin (Intermediate)</p>
+
+                  <div class="border-top pt-3">
+                    <h6 class="fw-bold text-primary mb-2"><i class="bi bi-telephone-fill me-2"></i>Contact Information</h6>
+                    <p class="mb-1"><strong>Phone:</strong> +92-319-481-4055</p>
+                    <p class="mb-1"><strong>Email:</strong> michael.lee@medicare.com</p>
+                    <p class="mb-0"><strong>Office Hours:</strong> Tue, Wed, Sat: 2:00 PM - 6:00 PM</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer border-0 bg-light">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            <a href="#appointment" class="btn btn-primary" data-bs-dismiss="modal">
+              <i class="bi bi-calendar-plus me-2"></i>Book Appointment
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dr. Sophia Patel Modal -->
+    <div class="modal fade" id="doctorModalSophia" tabindex="-1" aria-labelledby="doctorModalSophiaLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+          <div class="modal-header bg-primary text-white border-0">
+            <h5 class="modal-title fw-bold" id="doctorModalSophiaLabel">
+              <i class="bi bi-person-circle me-2"></i>Dr. Sophia Patel - Pediatrician
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-0">
+            <div class="row g-0">
+              <div class="col-md-5">
+                <img src="img/pexels-tima-miroshnichenko-8376277.jpg" class="img-fluid rounded-start h-100" alt="Dr. Sophia Patel" style="object-fit: cover; min-height: 400px;">
+              </div>
+              <div class="col-md-7 p-4">
+                <div class="mb-4">
+                  <h4 class="fw-bold text-primary mb-3">About Dr. Sophia Patel</h4>
+                  <p class="text-muted mb-3">Dr. Sophia Patel is a compassionate pediatrician with 8 years of experience in child healthcare. She specializes in preventive care, developmental pediatrics, and adolescent medicine.</p>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-mortarboard-fill me-2"></i>Education</h6>
+                  <ul class="list-unstyled mb-3">
+                    <li><strong>MD - Doctor of Medicine</strong><br><small class="text-muted">University of California, San Francisco, CA (2012-2016)</small></li>
+                    <li><strong>Pediatrics Residency</strong><br><small class="text-muted">Children's Hospital of Philadelphia, Philadelphia, PA (2016-2019)</small></li>
+                    <li><strong>Fellowship in Developmental Pediatrics</strong><br><small class="text-muted">Boston Children's Hospital, Boston, MA (2019-2020)</small></li>
+                    <li><strong>MPH - Master of Public Health</strong><br><small class="text-muted">Harvard T.H. Chan School of Public Health, Boston, MA (2021-2023)</small></li>
+                  </ul>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-award-fill me-2"></i>Certifications</h6>
+                  <div class="mb-3">
+                    <span class="badge bg-primary me-2 mb-1">Board Certified in Pediatrics</span>
+                    <span class="badge bg-primary me-2 mb-1">Board Certified in Developmental Pediatrics</span>
+                    <span class="badge bg-success me-2 mb-1">PALS Certified</span>
+                    <span class="badge bg-success me-2 mb-1">ACLS Certified</span>
+                  </div>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-briefcase-fill me-2"></i>Experience</h6>
+                  <p class="mb-3">8+ years of clinical experience | 15,000+ pediatric patients cared for</p>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-star-fill me-2"></i>Specialties</h6>
+                  <ul class="list-unstyled mb-3">
+                    <li>• Preventive Pediatrics & Well-Child Care</li>
+                    <li>• Developmental & Behavioral Pediatrics</li>
+                    <li>• Adolescent Medicine</li>
+                    <li>• Pediatric Nutrition & Growth</li>
+                    <li>• Immunization & Vaccination</li>
+                  </ul>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-translate me-2"></i>Languages</h6>
+                  <p class="mb-3">English (Native), Hindi (Native), Gujarati (Native), Spanish (Conversational)</p>
+
+                  <div class="border-top pt-3">
+                    <h6 class="fw-bold text-primary mb-2"><i class="bi bi-telephone-fill me-2"></i>Contact Information</h6>
+                    <p class="mb-1"><strong>Phone:</strong> +92-319-481-4055</p>
+                    <p class="mb-1"><strong>Email:</strong> sophia.patel@medicare.com</p>
+                    <p class="mb-0"><strong>Office Hours:</strong> Mon, Thu, Sat: 10:00 AM - 2:00 PM</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer border-0 bg-light">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            <a href="#appointment" class="btn btn-primary" data-bs-dismiss="modal">
+              <i class="bi bi-calendar-plus me-2"></i>Book Appointment
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dr. Daniel Kim Modal -->
+    <div class="modal fade" id="doctorModalDaniel" tabindex="-1" aria-labelledby="doctorModalDanielLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+          <div class="modal-header bg-primary text-white border-0">
+            <h5 class="modal-title fw-bold" id="doctorModalDanielLabel">
+              <i class="bi bi-person-circle me-2"></i>Dr. Daniel Kim - Surgeon
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-0">
+            <div class="row g-0">
+              <div class="col-md-5">
+                <img src="img/pexels-edward-jenner-4033148.jpg" class="img-fluid rounded-start h-100" alt="Dr. Daniel Kim" style="object-fit: cover; min-height: 400px;">
+              </div>
+              <div class="col-md-7 p-4">
+                <div class="mb-4">
+                  <h4 class="fw-bold text-primary mb-3">About Dr. Daniel Kim</h4>
+                  <p class="text-muted mb-3">Dr. Daniel Kim is a skilled general surgeon with 11 years of experience in surgical procedures. He specializes in minimally invasive surgery, laparoscopic procedures, and emergency surgical interventions.</p>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-mortarboard-fill me-2"></i>Education</h6>
+                  <ul class="list-unstyled mb-3">
+                    <li><strong>MD - Doctor of Medicine</strong><br><small class="text-muted">University of Michigan Medical School, Ann Arbor, MI (2009-2013)</small></li>
+                    <li><strong>General Surgery Residency</strong><br><small class="text-muted">Duke University Hospital, Durham, NC (2013-2018)</small></li>
+                    <li><strong>Fellowship in Minimally Invasive Surgery</strong><br><small class="text-muted">Cedars-Sinai Medical Center, Los Angeles, CA (2018-2019)</small></li>
+                    <li><strong>MS in Surgical Innovation</strong><br><small class="text-muted">Massachusetts Institute of Technology, Cambridge, MA (2020-2022)</small></li>
+                  </ul>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-award-fill me-2"></i>Certifications</h6>
+                  <div class="mb-3">
+                    <span class="badge bg-primary me-2 mb-1">Board Certified in General Surgery</span>
+                    <span class="badge bg-primary me-2 mb-1">Fellow of the American College of Surgeons (FACS)</span>
+                    <span class="badge bg-success me-2 mb-1">ATLS Certified</span>
+                    <span class="badge bg-success me-2 mb-1">ACLS Certified</span>
+                  </div>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-briefcase-fill me-2"></i>Experience</h6>
+                  <p class="mb-3">11+ years of clinical experience | 3000+ successful surgeries performed</p>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-star-fill me-2"></i>Specialties</h6>
+                  <ul class="list-unstyled mb-3">
+                    <li>• Minimally Invasive & Laparoscopic Surgery</li>
+                    <li>• Emergency & Trauma Surgery</li>
+                    <li>• Gastrointestinal Surgery</li>
+                    <li>• Hernia Repair Surgery</li>
+                    <li>• Surgical Oncology</li>
+                  </ul>
+
+                  <h6 class="fw-bold text-primary mb-2"><i class="bi bi-translate me-2"></i>Languages</h6>
+                  <p class="mb-3">English (Native), Korean (Native), Japanese (Conversational)</p>
+
+                  <div class="border-top pt-3">
+                    <h6 class="fw-bold text-primary mb-2"><i class="bi bi-telephone-fill me-2"></i>Contact Information</h6>
+                    <p class="mb-1"><strong>Phone:</strong> +92-319-481-4055</p>
+                    <p class="mb-1"><strong>Email:</strong> daniel.kim@medicare.com</p>
+                    <p class="mb-0"><strong>Office Hours:</strong> Tue, Thu, Sat: 11:00 AM - 3:00 PM</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer border-0 bg-light">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            <a href="#appointment" class="btn btn-primary" data-bs-dismiss="modal">
+              <i class="bi bi-calendar-plus me-2"></i>Book Appointment
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Appointment -->
+    <section id="appointment" class="py-5 bg-primary-subtle">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="fw-bold section-title" data-aos="fade-up">Book an Appointment</h2>
+            <div class="section-divider"></div>
+            <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+              Fill out the form and our team will confirm your visit shortly.
+            </p>
+          </div>
+        </div>
+        <div class="row g-4 align-items-stretch">
+          <div class="col-lg-7" data-aos="fade-right">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="card-body p-4">
+                <form id="appointmentForm" novalidate>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label for="fullName" class="form-label">Full Name</label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="John Wick" required />
+                      </div>
+                      <div class="invalid-feedback">Please enter your full name.</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="email" class="form-label">Email</label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="@example.com" required />
+                      </div>
+                      <div class="invalid-feedback">Please enter a valid email address.</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="phone" class="form-label">Phone</label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="+92-03xxxxxxxxx" required />
+                      </div>
+                      <div class="invalid-feedback">Please enter a valid phone number.</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="date" class="form-label">Preferred Date</label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-calendar-event"></i></span>
+                        <input type="date" class="form-control" id="date" name="date" required />
+                      </div>
+                      <div class="invalid-feedback">Please choose a date.</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="department" class="form-label">Department</label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-hospital"></i></span>
+                        <select class="form-select" id="department" name="department" required>
+                        <option value="" selected disabled>Choose...</option>
+                        <option>Cardiology</option>
+                        <option>Radiology</option>
+                        <option>Pediatrics</option>
+                        <option>General Medicine</option>
+                        <option>Orthopedics</option>
+                        </select>
+                      </div>
+                      <div class="helper-text">Pick the department that best matches your concern.</div>
+                      <div class="invalid-feedback">Please select a department.</div>
+                    </div>
+                    <div class="col-12">
+                      <label for="message" class="form-label">Message</label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-chat-dots"></i></span>
+                        <textarea class="form-control" id="message" name="message" rows="3" placeholder="Symptoms, concerns, or questions..."></textarea>
+                      </div>
+                    </div>
+                    <div class="col-12 d-grid d-sm-flex gap-3">
+                      <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="bi bi-calendar-plus me-2"></i>Submit Request
+                      </button>
+                      <button type="reset" class="btn btn-outline-secondary btn-lg">Clear</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5" data-aos="fade-left">
+            <div class="card h-100 border-0 shadow-sm">
+              <img src="img/hospital2.webp" class="img-fluid rounded" alt="Modern hospital exterior">
+              <div class="card-body p-4 d-flex flex-column justify-content-center">
+                <h5 class="fw-bold">Why Choose MediCare?</h5>
+                <ul class="list-unstyled mt-3 mb-0">
+                  <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Board-certified specialists</li>
+                  <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>State-of-the-art facilities</li>
+                  <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Patient-first care approach</li>
+                  <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Online booking & telehealth</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <!-- My Medical Records Section -->
+    <section id="my-medical-records" class="py-5 bg-light" style="display:none;">
+      <div class="container">
+        <div class="row mb-3">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="fw-bold section-title" data-aos="fade-up">My Medical Records</h2>
+            <div class="section-divider"></div>
+            <p class="text-muted" data-aos="fade-up" data-aos-delay="100">View your appointments, lab results, and prescriptions.</p>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-12">
+            <h4>Appointments</h4>
+            <div id="recordsAppointments"></div>
+            <hr>
+            <h4>Lab Results</h4>
+            <div id="recordsLabResults"></div>
+            <hr>
+            <h4>Prescriptions</h4>
+            <div id="recordsPrescriptions"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container" data-aos="fade-up">
+      <div class="row align-items-center g-3">
+        <div class="col-lg-7">
+          <h3 class="mb-1" style="margin-top: 40px;">Get health tips in your inbox</h3>
+          <p class="text-secondary mb-0">Monthly newsletter with doctor insights-no spam.</p>
+        </div>
+        <div class="col-lg-5">
+          <form id="newsletter" class="d-flex gap-2 align-items-start" style="margin-top: 34px;">
+            <input type="email" class="form-control" placeholder="Your email" required />
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Health Blog Section -->
+    <section id="health-blog" class="py-5 bg-light">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="fw-bold section-title" data-aos="fade-up">Health Blog & Awareness</h2>
+            <div class="section-divider"></div>
+            <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+              Read articles, tips, and awareness blogs from our doctors. Stay informed with the latest health information and advice.
+            </p>
+          </div>
+        </div>
+        <div class="row g-4" id="doctorArticles">
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <div class="card h-100 shadow-lg">
+              <div class="card-body">
+                <h5 class="card-title">5 Tips for a Healthy Heart</h5>
+                <p class="card-text text-muted">By Dr. Emily Carter</p>
+                <p class="card-text">Maintain a balanced diet, exercise regularly, avoid smoking, manage stress, and get regular checkups for a healthy heart.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <div class="card h-100 shadow-lg">
+              <div class="card-body">
+                <h5 class="card-title">How to Boost Your Immunity</h5>
+                <p class="card-text text-muted">By Dr. Michael Lee</p>
+                <p class="card-text">Eat a variety of fruits and vegetables, get enough sleep, stay hydrated, exercise, and practice good hygiene to strengthen your immune system.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <div class="card h-100 shadow-lg">
+              <div class="card-body">
+                <h5 class="card-title">Children's Health: Preventing Common Illnesses</h5>
+                <p class="card-text text-muted">By Dr. Sophia Patel</p>
+                <p class="card-text">Ensure regular vaccinations, encourage handwashing, provide a balanced diet, and schedule routine checkups to keep your child healthy.</p>
+              </div>
+            </div>
+          </div>
+       <h4 class="fw-bold mb-3">Search Trusted Health Topics (MedlinePlus)</h4>
+   <form id="medlineSearchForm" class="d-flex justify-content-center gap-2 mb-3" target="_blank" 
+      action="https://medlineplus.gov/search/?">
+  <input type="text" name="query" id="medlineSearchInput" 
+         class="form-control w-50" placeholder="Search health topic..." required />
+  <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i> Search</button>
+   </form>
+  <div class="text-muted small">Results will open directly on MedlinePlus.gov</div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-5">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="fw-bold section-title" data-aos="fade-up">Contact Us</h2>
+            <div class="section-divider"></div>
+            <p class="text-muted" data-aos="fade-up" data-aos-delay="100">We are here to help. Reach out anytime.</p>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-5" data-aos="fade-right">
+            <div class="card border-0 shadow-lg h-100">
+              <div class="card-body p-4">
+                <h5 class="fw-bold mb-3">Get in touch</h5>
+                <p class="text-muted">Medicare Hospital, Sachal Colony, Larkana</p>
+                <p class="mb-1"><i class="bi bi-telephone text-primary me-2"></i>+92-3194814055</p>
+                <p class="mb-1"><i class="bi bi-envelope text-primary me-2"></i>info@medicare.com</p>
+                <p class="mb-1"><i class="bi bi-instagram text-primary me-2"></i>Medicarepk75</p>
+                <p class="mb-1"><i class="bi bi-tiktok text-primary me-2"></i>@medicarepakistan</p>
+                <p class="mb-1"><i class="bi bi-twitter-x text-primary me-2"></i>MedicarePakistan9</p>
+                <p class="mb-0"><i class="bi bi-clock text-primary me-2"></i> 8:00 AM - 8:00 PM</p>
+                
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-7" data-aos="fade-left">
+            <div class="ratio ratio-16x9 rounded overflow-hidden shadow-sm">
+              <iframe
+                title="MediCare Location"
+                src="https://www.google.com/maps?q=hospital&output=embed"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Back to top -->
+    <button id="backToTop" class="btn btn-primary rounded-circle back-to-top" aria-label="Back to top">
+      <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="loginRequiredModal" tabindex="-1" aria-labelledby="loginRequiredModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+          <div class="modal-header bg-primary text-white border-0">
+            <h5 class="modal-title fw-bold" id="loginRequiredModalLabel">
+              <i class="bi bi-person-plus me-2"></i>Register to Book
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-4">
+            <form id="modalRegisterForm" novalidate>
+              <div class="mb-3">
+                <label for="regFullName" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="regFullName" placeholder="John Wick" required />
+                <div class="invalid-feedback">Please enter the full name.</div>
+              </div>
+              <div class="mb-3">
+                <label for="regEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="regEmail" placeholder="name@example.com" required />
+                <div class="invalid-feedback">Enter a valid email.</div>
+              </div>
+              <div class="mb-4">
+                <label for="regPhone" class="form-label">Phone</label>
+                <input type="tel" class="form-control" id="regPhone" placeholder="+92-3xxxxxxxxx" required />
+                <div class="invalid-feedback">Enter a valid phone.</div>
+              </div>
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-person-check me-2"></i>Create Account & Continue</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="bi bi-x me-2"></i>Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+          <div class="modal-header bg-primary text-white border-0">
+            <h5 class="modal-title fw-bold" id="loginModalLabel">
+              <i class="bi bi-box-arrow-in-right me-2"></i>Login
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-4">
+            <form id="modalLoginForm" novalidate>
+              <div class="mb-3">
+                <label for="loginEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="loginEmail" placeholder="name@example.com" required />
+                <div class="invalid-feedback">Enter a valid email.</div>
+              </div>
+              <div class="mb-4">
+                <label for="loginPhone" class="form-label">Phone</label>
+                <input type="tel" class="form-control" id="loginPhone" placeholder="+92-3xxxxxxxxx" required />
+                <div class="invalid-feedback">Enter your phone.</div>
+              </div>
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-box-arrow-in-right me-2"></i>Login</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="bi bi-x me-2"></i>Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast (Form submit feedback) -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+      <div id="submitToast" class="toast align-items-center text-bg-success border-0" role="status" aria-live="polite" aria-atomic="true">
+        <div class="d-flex">
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5 mt-5">
+      <div class="container">
+        <div class="row g-4">
+          <!-- About Us Section -->
+          <div class="col-lg-4" data-aos="fade-up">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-hospital me-2 text-primary fs-4"></i>
+              <h5 class="mb-0 fw-bold">MediCare</h5>
+            </div>
+            <p class="text-white mb-4">
+              At MediCare, we are committed to providing exceptional healthcare services with compassion, 
+              cutting-edge technology, and a patient-centered approach. Our mission is to improve the 
+              health and well-being of our community through quality medical care.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" class="text-white hover-primary" aria-label="Facebook">
+                <i class="bi bi-facebook fs-5"></i>
+              </a>
+              <a href="#" class="text-white hover-primary" aria-label="Twitter">
+                <i class="bi bi-twitter-x fs-5"></i>
+              </a>
+              <a href="#" class="text-white hover-primary" aria-label="Instagram">
+                <i class="bi bi-instagram fs-5"></i>
+              </a>
+              <a href="#" class="text-white hover-primary" aria-label="LinkedIn">
+                <i class="bi bi-linkedin fs-5"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <h6 class="fw-bold mb-3 text-primary">Quick Links</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#home" class="text-white text-decoration-none hover-primary">Home</a></li>
+              <li class="mb-2"><a href="#services" class="text-white text-decoration-none hover-primary">Services</a></li>
+              <li class="mb-2"><a href="#doctors" class="text-white text-decoration-none hover-primary">Doctors</a></li>
+              <li class="mb-2"><a href="#appointment" class="text-white text-decoration-none hover-primary">Appointment</a></li>
+              <li class="mb-2"><a href="#contact" class="text-white text-decoration-none hover-primary">Contact</a></li>
+              
+            </ul>
+          </div>
+
+          <!-- Services -->
+          <div class="col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <h6 class="fw-bold mb-3 text-primary">Services</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#doctors" class="text-white text-decoration-none hover-primary">Cardiology</a></li>
+              <li class="mb-2"><a href="#doctors" class="text-white text-decoration-none hover-primary">Radiology</a></li>
+              <li class="mb-2"><a href="#doctors" class="text-white text-decoration-none hover-primary">Pediatrics</a></li>
+              <li class="mb-2"><a href="#services" class="text-white text-decoration-none hover-primary">Emergency Care</a></li>
+              <li class="mb-2"><a href="#services" class="text-white text-decoration-none hover-primary">Laboratory</a></li>
+              <li class="mb-2"><a href="#services" class="text-white text-decoration-none hover-primary">Pharmacy</a></li>
+            </ul>
+          </div>
+
+          <!-- Hospital Interior Image & Contact -->
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="mb-4">
+              <h6 class="fw-bold mb-3 text-primary">Our Facility</h6>
+              <div class="position-relative overflow-hidden rounded shadow-sm">
+                <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                     alt="Modern Hospital Interior" 
+                     class="img-fluid w-100" 
+                     style="height: 200px; object-fit: cover;">
+                <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-20 d-flex align-items-center justify-content-center">
+                  <div class="text-center text-white">
+                    <i class="bi bi-hospital fs-1 mb-2"></i>
+                    <p class="mb-0 fw-semibold">State-of-the-Art Facilities</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h6 class="fw-bold mb-3 text-primary">Contact Info</h6>
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-geo-alt text-primary me-2"></i>
+                <small class="text-light-emphasis">Sachal Colony, Larkana</small>
+              </div>
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-telephone text-primary me-2"></i>
+                <small class="text-light-emphasis">+92-3194814055</small>
+              </div>
+              <div class="d-flex align-items-center">
+                <i class="bi bi-envelope text-primary me-2"></i>
+                <small class="text-light-emphasis">info@medicare.com</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <hr class="my-4 border-secondary">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p class="mb-0 text-light-emphasis small">
+              &copy; 2024 MediCare. All rights reserved. | 
+              <a href="#" class="text-light-emphasis text-decoration-none hover-primary">Privacy Policy</a> | 
+              <a href="#" class="text-light-emphasis text-decoration-none hover-primary">Terms of Service</a>
+            </p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p class="mb-0 text-light-emphasis small">
+              <i class="bi bi-heart-fill text-danger me-1"></i>
+              Made with care for your health
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating Chatbot Widget -->
+    <div id="chatbotWidget" class="position-fixed" style="bottom: 24px; left: 24px; z-index: 1300;">
+      <button id="openChatbotBtn" class="btn btn-primary rounded-circle shadow-lg" style="width:56px; height:56px; display:flex; align-items:center; justify-content:center;">
+        <i class="bi bi-chat-dots fs-4"></i>
+      </button>
+      <div id="chatbotPanel" class="card shadow-lg" style="width: 340px; max-width: 90vw; display: none; position: absolute; bottom: 70px; left: 0;">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-2 px-3">
+          <span class="fw-bold d-flex align-items-center gap-2"><i class="bi bi-robot"></i><span>Health Chatbot</span></span>
+          <div class="d-flex align-items-center gap-2">
+          <button id="closeChatbotBtn" class="btn btn-sm btn-light rounded-circle p-1" style="width:28px; height:28px;"><i class="bi bi-x"></i></button>
+          </div>
+        </div>
+        <div class="card-body p-3" style="height: 320px; overflow-y: auto; background: #f8fafc;" id="chatbotMessages">
+          <div class="text-center text-muted small mb-2">Ask a health question!</div>
+        </div>
+        <div class="card-footer p-2 bg-white border-0">
+          <form id="chatbotForm" autocomplete="off" class="d-flex gap-2">
+            <input type="text" id="chatbotInput" class="form-control" placeholder="Type your question..." required style="font-size: 0.98rem;" />
+            <button class="btn btn-primary" type="submit"><i class="bi bi-send"></i></button>
+          </form>
+          <div id="chatbotSuggestions" class="d-flex flex-wrap gap-2 mt-2"></div>
+          <div class="mt-2 d-flex justify-content-end">
+            <select id="chatbotLang" class="form-select form-select-sm" style="width: 140px;">
+              <option value="en">English</option>
+              <option value="ur">اردو</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Chatbot Widget -->
+
+    <!-- Emergency Modal -->
+    <div class="modal fade" id="emergencyModal" tabindex="-1" aria-labelledby="emergencyModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+          <div class="modal-header bg-danger text-white border-0">
+            <h5 class="modal-title fw-bold" id="emergencyModalLabel">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>Emergency Support
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-4">
+            <h5 class="mb-3">Call for Immediate Help</h5>
+            <ul class="list-unstyled mb-3">
+              <li class="mb-2"><b>Ambulance:</b> <a href="tel:115" class="text-danger fw-bold">115</a> (Pakistan National Ambulance)</li>
+              <li class="mb-2"><b>Hospital Emergency:</b> <a href="tel:+923194814055" class="text-danger fw-bold">+92-319-4814055</a></li>
+              <li class="mb-2"><b>Police:</b> <a href="tel:15" class="text-danger fw-bold">15</a></li>
+            </ul>
+            <div class="alert alert-danger mb-2"><b>If you or someone is in immediate danger, call the ambulance or hospital emergency number above.</b></div>
+            <p class="mb-0 text-secondary small">Stay calm, provide your location, and describe the emergency clearly to the operator.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Doctor Modal Enhancement Script -->
+    <script>
+      // Doctor modal functionality enhancement
+      document.addEventListener('DOMContentLoaded', function() {
+        // Handle doctor modal "Book Appointment" button clicks
+        const doctorModals = ['doctorModalEmily', 'doctorModalMichael', 'doctorModalSophia', 'doctorModalDaniel'];
+
+        doctorModals.forEach(function(modalId) {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.addEventListener('shown.bs.modal', function() {
+              // Optional: Add any modal shown logic here
+            });
+
+            // Handle book appointment button click
+            const bookBtn = modal.querySelector('.modal-footer .btn-primary');
+            if (bookBtn) {
+              bookBtn.addEventListener('click', function() {
+                // Pre-select department based on doctor
+                const departmentSelect = document.getElementById('department');
+                if (departmentSelect) {
+                  let departmentValue = '';
+                  switch(modalId) {
+                    case 'doctorModalEmily':
+                      departmentValue = 'Cardiology';
+                      break;
+                    case 'doctorModalMichael':
+                      departmentValue = 'Radiology';
+                      break;
+                    case 'doctorModalSophia':
+                      departmentValue = 'Pediatrics';
+                      break;
+                    case 'doctorModalDaniel':
+                      departmentValue = 'General Medicine';
+                      break;
+                  }
+                  if (departmentValue) {
+                    departmentSelect.value = departmentValue;
+                  }
+                }
+              });
+            }
+          }
+        });
+
+        // Add hover effects for doctor cards
+        const doctorCards = document.querySelectorAll('.doctor-card');
+        doctorCards.forEach(function(card) {
+          card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px) scale(1.02)';
+          });
+
+          card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+          });
+        });
+      });
+    </script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <!-- Custom JS -->
+    <script src="./assets/js/main.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      // Initialize AOS
+      AOS.init({ once: true, duration: 700, offset: 80, easing: 'ease-out' });
+
+      // Back to top behavior
+      (function() {
+        const backToTop = document.getElementById('backToTop');
+        const toggleBackToTop = () => {
+          if (!backToTop) return;
+          if (window.scrollY > 300) backToTop.classList.add('show');
+          else backToTop.classList.remove('show');
+        };
+        window.addEventListener('scroll', toggleBackToTop, { passive: true });
+        if (backToTop) backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        toggleBackToTop();
+      })();
+    </script>
+
+    <!-- Login Check System -->
+    <script>
+      // Check if user is logged in (you can modify this logic based on your authentication system)
+      function isUserLoggedIn() {
+        return localStorage.getItem('userLoggedIn') === 'true';
+      }
+      function getCurrentUserName() {
+        try {
+          const u = JSON.parse(localStorage.getItem('currentUser') || '{}');
+          return u.fullName || '';
+        } catch { return ''; }
+      }
+      function setLoggedIn(user) {
+        localStorage.setItem('userLoggedIn', 'true');
+        localStorage.setItem('currentUser', JSON.stringify({ fullName: user.fullName, email: user.email, phone: user.phone || '' }));
+        try { localStorage.setItem('autoLoginEmail', (user.email || '').toLowerCase()); } catch {}
+      }
+
+      // Function to show login required modal
+      function showLoginRequiredModal() {
+        console.log('Showing login modal...');
+        const modalElement = document.getElementById('loginRequiredModal');
+        if (modalElement) {
+          const modal = new bootstrap.Modal(modalElement);
+          modal.show();
+          console.log('Modal should be visible now');
+        } else {
+          console.error('Modal element not found!');
+        }
+      }
+
+      // Test function to show popup immediately
+      function testPopup() {
+        showLoginRequiredModal();
+      }
+
+      // Render navbar auth buttons based on login state
+      function renderAuthArea() {
+        const area = document.getElementById('authArea');
+        if (!area) return;
+        if (isUserLoggedIn()) {
+          const name = getCurrentUserName();
+          area.innerHTML = `
+            <div class="dropdown d-inline-block">
+              <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle me-1"></i>${name ? name.split(' ')[0] : 'Account'}
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#appointment"><i class="bi bi-calendar2-check me-2"></i>Book Appointment</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><button class="dropdown-item text-danger" id="logoutBtn"><i class="bi bi-box-arrow-right me-2"></i>Logout</button></li>
+              </ul>
+            </div>`;
+          const logoutBtn = document.getElementById('logoutBtn');
+          if (logoutBtn) {
+            logoutBtn.addEventListener('click', function() {
+              localStorage.removeItem('userLoggedIn');
+              localStorage.removeItem('currentUser');
+              localStorage.removeItem('autoLoginEmail');
+              location.reload();
+            });
+          }
+        } else {
+          area.innerHTML = `
+            <div class="d-flex align-items-center gap-2">
+  <button class="btn btn-primary" id="openRegisterBtn" style="background-color: rgb(2, 76, 161); border: none;">
+    <i class="bi bi-person-plus me-1"></i>Register
+  </button>
+  <button class="btn btn-outline-primary" id="openLoginBtn">
+    <i class="bi bi-box-arrow-in-right me-1"></i>Login
+  </button>
+</div>`;
+          const openBtn = document.getElementById('openRegisterBtn');
+          if (openBtn) {
+            openBtn.addEventListener('click', function(){
+              const modalElement = document.getElementById('loginRequiredModal');
+              if (modalElement) new bootstrap.Modal(modalElement).show();
+            });
+          }
+          const openLoginBtn = document.getElementById('openLoginBtn');
+          if (openLoginBtn) {
+            openLoginBtn.addEventListener('click', function(){
+              const modalElement = document.getElementById('loginModal');
+              if (modalElement) new bootstrap.Modal(modalElement).show();
+            });
+          }
+        }
+      }
+
+      // Appointments persistence helpers
+      function getAppointments() {
+        try { return JSON.parse(localStorage.getItem('appointments') || '[]'); } catch { return []; }
+      }
+      function saveAppointments(list) {
+        localStorage.setItem('appointments', JSON.stringify(list));
+      }
+      function renderAppointmentsTable() {
+        const tbody = document.getElementById('appointmentsTbody');
+        if (!tbody) return;
+        const items = getAppointments();
+        if (!items.length) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="3">
+                <div class="empty-state text-center">
+                  <div class="mb-2"><i class="bi bi-calendar2-x text-primary" style="font-size:1.5rem;"></i></div>
+                  <div class="fw-semibold">No appointments yet</div>
+                  <div class="text-secondary small mb-2">Use the form above to create your first appointment.</div>
+                  <a href="#appointment" class="btn btn-primary btn-sm"><i class="bi bi-calendar-plus me-1"></i>Book now</a>
+                </div>
+              </td>
+            </tr>`;
+          return;
+        }
+        tbody.innerHTML = items.map(function(a, idx) {
+          const collapseId = 'apptDetails' + idx;
+          const name = a.fullName || '';
+          const date = a.date || '';
+          const dept = a.department || '';
+          return `
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-person text-primary"></i>
+                  <span class="fw-semibold">${name}</span>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-calendar-event text-primary"></i>
+                  <span>${date}</span>
+                  ${dept ? `<span class="badge badge-dept ms-2">${dept}</span>` : ''}
+                </div>
+              </td>
+              <td>
+                <div class="d-flex flex-wrap gap-2">
+                  <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="false" aria-controls="${collapseId}">
+                    <i class="bi bi-chevron-down"></i> Details
+                  </button>
+                  <button class="btn btn-sm btn-outline-success btn-fill" data-index="${idx}"><i class="bi bi-pencil"></i> Fill Form</button>
+                  <button class="btn btn-sm btn-outline-danger btn-delete" data-index="${idx}"><i class="bi bi-trash"></i> Delete</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="collapse" id="${collapseId}">
+              <td colspan="3" class="details-cell">
+                <div class="card border-0 shadow-sm">
+                  <div class="card-body p-3">
+                    <div class="row g-3">
+                      <div class="col-md-4"><div class="small text-secondary">Email</div><div class="fw-semibold">${a.email || ''}</div></div>
+                      <div class="col-md-4"><div class="small text-secondary">Phone</div><div class="fw-semibold">${a.phone || ''}</div></div>
+                      <div class="col-md-4"><div class="small text-secondary">Department</div><div class="fw-semibold">${dept || ''}</div></div>
+                      <div class="col-12"><div class="small text-secondary">Message</div><div>${a.message ? a.message : '<span class="text-muted">—</span>'}</div></div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+        // Wire actions
+        try {
+          tbody.querySelectorAll('.btn-delete').forEach(function(btn){
+            btn.addEventListener('click', function(){
+              const i = parseInt(this.getAttribute('data-index'));
+              deleteAppointment(i);
+            });
+          });
+          tbody.querySelectorAll('.btn-fill').forEach(function(btn){
+            btn.addEventListener('click', function(){
+              const i = parseInt(this.getAttribute('data-index'));
+              const items = getAppointments();
+              const a = items[i];
+              if (a) fillAppointmentForm(a);
+            });
+          });
+        } catch {}
+      }
+
+      function deleteAppointment(index) {
+        try {
+          const items = getAppointments();
+          if (index >= 0 && index < items.length) {
+            items.splice(index, 1);
+            saveAppointments(items);
+            renderAppointmentsTable();
+          }
+        } catch {}
+      }
+
+      function fillAppointmentForm(a) {
+        const form = document.getElementById('appointmentForm');
+        if (!form) return;
+        try {
+          const setVal = function(id, val){ const el = document.getElementById(id); if (el) el.value = val || ''; };
+          setVal('fullName', a.fullName || '');
+          setVal('email', a.email || '');
+          setVal('phone', a.phone || '');
+          setVal('date', a.date || '');
+          const dept = document.getElementById('department');
+          if (dept) dept.value = a.department || '';
+          const msg = document.getElementById('message');
+          if (msg) msg.value = a.message || '';
+          // Focus/scroll to form
+          const section = document.getElementById('appointment');
+          if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Brief visual hint
+          form.classList.add('was-validated');
+          setTimeout(function(){ form.classList.remove('was-validated'); }, 1200);
+        } catch {}
+      }
+
+      // --- Medical Records Helpers ---
+      function getMedicalRecords(email) {
+        try {
+          const all = JSON.parse(localStorage.getItem('medicalRecords') || '{}');
+          return all[email] || { appointments: [], labResults: [], prescriptions: [] };
+        } catch { return { appointments: [], labResults: [], prescriptions: [] }; }
+      }
+      function saveMedicalRecords(email, records) {
+        let all = {};
+        try { all = JSON.parse(localStorage.getItem('medicalRecords') || '{}'); } catch { all = {}; }
+        all[email] = records;
+        localStorage.setItem('medicalRecords', JSON.stringify(all));
+      }
+      // Add demo lab results and prescriptions if missing
+      function ensureDemoRecords(email) {
+        const rec = getMedicalRecords(email);
+        if (!rec.labResults.length) {
+          rec.labResults.push({
+            date: '2025-09-10',
+            test: 'CBC',
+            result: 'Normal',
+            notes: 'No abnormalities detected.'
+          });
+        }
+        if (!rec.prescriptions.length) {
+          rec.prescriptions.push({
+            date: '2025-09-12',
+            medicine: 'Paracetamol 500mg',
+            dosage: '1 tablet every 8 hours for 3 days',
+            notes: 'For mild fever.'
+          });
+        }
+        saveMedicalRecords(email, rec);
+      }
+
+      // Override the existing form submission logic
+      document.addEventListener('DOMContentLoaded', function() {
+        // Build doctor availability map on load
+        try { buildDoctorAvailability(); } catch {}
+        console.log('DOM loaded, setting up form...');
+        // Attempt auto-login restoration if needed
+        try {
+          const isIn = isUserLoggedIn();
+          const cur = JSON.parse(localStorage.getItem('currentUser') || 'null');
+          const autoEmail = (localStorage.getItem('autoLoginEmail') || '').toLowerCase();
+          if (!isIn && autoEmail) {
+            let users = [];
+            try { users = JSON.parse(localStorage.getItem('users') || '[]'); } catch { users = []; }
+            const user = users.find(function(u){ return (u.email || '').toLowerCase() === autoEmail; });
+            if (user) setLoggedIn(user);
+          } else if (isIn && (!cur || !cur.email)) {
+            // repair currentUser from autoLoginEmail
+            let users = [];
+            try { users = JSON.parse(localStorage.getItem('users') || '[]'); } catch { users = []; }
+            const user = users.find(function(u){ return (u.email || '').toLowerCase() === autoEmail; });
+            if (user) setLoggedIn(user);
+          }
+        } catch {}
+        renderAuthArea();
+        renderAppointmentsTable();
+        
+        // Wait a bit for main.js to load first
+        setTimeout(function() {
+          const form = document.getElementById('appointmentForm');
+          const toastEl = document.getElementById('submitToast');
+          const toast = new bootstrap.Toast(toastEl, { delay: 3500 });
+
+          if (form) {
+            console.log('Form found, setting up event listener...');
+            
+            // Remove the existing event listener by cloning the form
+            const newForm = form.cloneNode(true);
+            form.parentNode.replaceChild(newForm, form);
+            
+            // Add our custom event listener
+            newForm.addEventListener('submit', function (event) {
+              event.preventDefault();
+              event.stopPropagation();
+              
+              console.log('Form submitted, checking login status...');
+              
+              // Check if user is logged in first
+              if (!isUserLoggedIn()) {
+                console.log('User not logged in, showing modal...');
+                // stash current form data to resume after registration
+                const pending = Object.fromEntries(new FormData(newForm));
+                localStorage.setItem('pendingAppointment', JSON.stringify(pending));
+                showLoginRequiredModal();
+                return false;
+              }
+              
+              console.log('User is logged in, proceeding with form...');
+              
+              // If user is logged in, proceed with form validation and submission
+              if (!newForm.checkValidity()) {
+                newForm.classList.add('was-validated');
+                return false;
+              } else {
+                // Save to localStorage
+                const formData = new FormData(newForm);
+                const appointment = {
+                  fullName: formData.get('fullName') || '',
+                  email: formData.get('email') || '',
+                  phone: formData.get('phone') || '',
+                  date: formData.get('date') || '',
+                  department: formData.get('department') || '',
+                  message: formData.get('message') || ''
+                };
+                const current = getAppointments();
+                current.push(appointment);
+                saveAppointments(current);
+                renderAppointmentsTable();
+                // Save to medical records if logged in
+                const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
+                if (user && user.email) {
+                  const rec = getMedicalRecords(user.email);
+                  rec.appointments.push(appointment);
+                  saveMedicalRecords(user.email, rec);
+                  ensureDemoRecords(user.email);
+                  try { renderMedicalRecordsSection(); } catch {}
+                }
+
+                // Feedback and reset
+                toast.show();
+                newForm.classList.remove('was-validated');
+                newForm.reset();
+                console.log('Appointment saved:', appointment);
+              }
+            });
+          } else {
+            console.error('Form not found!');
+          }
+        }, 100); // Small delay to ensure main.js loads first
+
+        // Registration modal submit handler
+        const regForm = document.getElementById('modalRegisterForm');
+        if (regForm) {
+          regForm.addEventListener('submit', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            if (!regForm.checkValidity()) {
+              regForm.classList.add('was-validated');
+              return;
+            }
+            const user = {
+              fullName: document.getElementById('regFullName').value.trim(),
+              email: document.getElementById('regEmail').value.trim().toLowerCase(),
+              phone: document.getElementById('regPhone').value.trim()
+            };
+            // save or upsert into users
+            let users = [];
+            try { users = JSON.parse(localStorage.getItem('users') || '[]'); } catch { users = []; }
+            const idx = users.findIndex(function(u){ return u.email === user.email; });
+            if (idx >= 0) { users[idx] = Object.assign({}, users[idx], user); } else { users.push(user); }
+            localStorage.setItem('users', JSON.stringify(users));
+            setLoggedIn(user);
+            renderAuthArea();
+
+            // if there is a pending appointment, finalize and store it now with user info
+            try {
+              const pending = JSON.parse(localStorage.getItem('pendingAppointment') || 'null');
+              if (pending) {
+                const list = getAppointments();
+                list.push(pending);
+                saveAppointments(list);
+                renderAppointmentsTable();
+                // also save to medical records for the newly registered user
+                try {
+                  const rec = getMedicalRecords(user.email);
+                  rec.appointments.push(pending);
+                  saveMedicalRecords(user.email, rec);
+                  ensureDemoRecords(user.email);
+                  renderMedicalRecordsSection();
+                } catch {}
+                localStorage.removeItem('pendingAppointment');
+                // show toast if available
+                const toastEl2 = document.getElementById('submitToast');
+                if (toastEl2) new bootstrap.Toast(toastEl2, { delay: 3500 }).show();
+              }
+            } catch {}
+
+            // close modal
+            const modalEl = document.getElementById('loginRequiredModal');
+            if (modalEl) bootstrap.Modal.getInstance(modalEl)?.hide();
+          });
+        }
+
+        // Add login modal logic
+        const loginForm = document.getElementById('modalLoginForm');
+        if (loginForm) {
+          loginForm.addEventListener('submit', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            if (!loginForm.checkValidity()) {
+              loginForm.classList.add('was-validated');
+              return;
+            }
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+            const phone = document.getElementById('loginPhone').value.trim();
+            let users = [];
+            try { users = JSON.parse(localStorage.getItem('users') || '[]'); } catch { users = []; }
+            const user = users.find(u => u.email === email && u.phone === phone);
+            if (user) {
+              setLoggedIn(user);
+              renderAuthArea();
+            // if there was a pending appointment before login, attach it to records
+            try {
+              const pending = JSON.parse(localStorage.getItem('pendingAppointment') || 'null');
+              if (pending) {
+                const rec = getMedicalRecords(user.email);
+                rec.appointments.push(pending);
+                saveMedicalRecords(user.email, rec);
+                ensureDemoRecords(user.email);
+                renderMedicalRecordsSection();
+                localStorage.removeItem('pendingAppointment');
+                const toastEl2 = document.getElementById('submitToast');
+                if (toastEl2) new bootstrap.Toast(toastEl2, { delay: 3500 }).show();
+              }
+            } catch {}
+              const modalEl = document.getElementById('loginModal');
+              if (modalEl) bootstrap.Modal.getInstance(modalEl)?.hide();
+            } else {
+              alert('User not found or phone/email incorrect.');
+            }
+          });
+        }
+      });
+
+      // Add a test button to trigger the popup (for testing)
+      window.testPopup = testPopup;
+
+      // Render My Medical Records section
+      function renderMedicalRecordsSection() {
+        const section = document.getElementById('my-medical-records');
+        if (!section) return;
+        if (!isUserLoggedIn()) {
+          section.style.display = 'none';
+          return;
+        }
+        section.style.display = '';
+        const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        if (!user || !user.email) return;
+        const rec = getMedicalRecords(user.email);
+        // Appointments
+        const apptDiv = document.getElementById('recordsAppointments');
+        if (apptDiv) {
+          if (!rec.appointments.length) {
+            apptDiv.innerHTML = '<div class="text-muted">No appointments found.</div>';
+          } else {
+            apptDiv.innerHTML = `<ul class='list-group mb-3'>${rec.appointments.map(a => `<li class='list-group-item'>${a.date || ''} - ${a.department || ''} - ${a.fullName || ''}</li>`).join('')}</ul>`;
+          }
+        }
+        // Lab Results
+        const labDiv = document.getElementById('recordsLabResults');
+        if (labDiv) {
+          if (!rec.labResults.length) {
+            labDiv.innerHTML = '<div class="text-muted">No lab results found.</div>';
+          } else {
+            labDiv.innerHTML = `<ul class='list-group mb-3'>${rec.labResults.map(l => `<li class='list-group-item'><b>${l.test}</b> (${l.date}): ${l.result} <span class='text-secondary small'>${l.notes || ''}</span></li>`).join('')}</ul>`;
+          }
+        }
+        // Prescriptions
+        const presDiv = document.getElementById('recordsPrescriptions');
+        if (presDiv) {
+          if (!rec.prescriptions.length) {
+            presDiv.innerHTML = '<div class="text-muted">No prescriptions found.</div>';
+          } else {
+            presDiv.innerHTML = `<ul class='list-group mb-3'>${rec.prescriptions.map(p => `<li class='list-group-item'><b>${p.medicine}</b> (${p.date}): ${p.dosage} <span class='text-secondary small'>${p.notes || ''}</span></li>`).join('')}</ul>`;
+          }
+        }
+      }
+      // Call on DOMContentLoaded and after login/logout
+      document.addEventListener('DOMContentLoaded', renderMedicalRecordsSection);
+      // Patch into renderAuthArea to refresh records section on login/logout
+      const origRenderAuthArea = renderAuthArea;
+      renderAuthArea = function() {
+        origRenderAuthArea();
+        renderMedicalRecordsSection();
+      };
+    </script>
+
+    <!-- Chatbot Q&A data -->
+    <script>
+      const chatbotFAQs_i18n = {
+        en: [
+        { q: 'What are your hospital timings?', a: 'We are open Monday to Saturday, 8:00 AM to 8:00 PM.' },
+        { q: 'How do I book an appointment?', a: 'You can book an appointment online using the form on our website or by calling our reception.' },
+        { q: 'Do you offer emergency services?', a: 'Yes, we provide 24/7 emergency care with rapid response teams.' },
+        { q: 'What departments do you have?', a: 'We offer Cardiology, Radiology, Pediatrics, General Medicine, Orthopedics, Laboratory, Pharmacy, and more.' },
+        { q: 'Can I get lab tests done?', a: 'Yes, our laboratory offers a wide range of diagnostic tests with quick turnaround.' },
+        { q: 'How do I contact a doctor?', a: 'You can contact our doctors through the appointment form or by calling our hospital.' },
+        { q: 'Is telehealth available?', a: 'Yes, we offer online booking and telehealth consultations for your convenience.' },
+        { q: 'Where is the hospital located?', a: 'We are located at Sachal Colony, Larkana.' },
+        { q: 'What insurance do you accept?', a: 'Please contact our reception for the latest information on accepted insurance plans.' },
+        { q: 'Do you have female doctors?', a: 'Yes, we have experienced female doctors and specialists available in various departments. Please mention your preference when booking an appointment.' },
+        { q: 'Are home visits available?', a: 'Currently, we do not offer home visits. All consultations and treatments are provided at our hospital facility.' },
+        { q: 'What is the consultation fee?', a: 'Consultation fees vary by department and doctor. Please contact our reception or check our website for the latest fee details.' },
+        { q: 'Is there a pharmacy on site?', a: 'Yes, we have a fully stocked on-site pharmacy with expert pharmacists to assist you.' },
+        { q: 'Can I reschedule my appointment?', a: 'Yes, you can reschedule your appointment by contacting our reception or replying to your appointment confirmation email.' },
+        { q: 'Do you have child specialists?', a: 'Yes, we have qualified pediatricians and child specialists available for consultations.' }
+        ],
+        ur: [
+          { q: 'اسپتال کے اوقات کیا ہیں؟', a: 'ہم پیر سے ہفتہ، صبح 8 بجے سے رات 8 بجے تک کھلے ہیں۔' },
+          { q: 'اپوائنٹمنٹ کیسے بُک کروں؟', a: 'آپ ہماری ویب سائٹ پر فارم کے ذریعے یا ریسپشن پر کال کر کے اپوائنٹمنٹ بُک کر سکتے ہیں۔' },
+          { q: 'کیا ایمرجنسی سروس موجود ہے؟', a: 'جی ہاں، ہماری ایمرجنسی سروس 24/7 دستیاب ہے۔' },
+          { q: 'آپ کے پاس کون کون سے شعبے ہیں؟', a: 'ہمارے پاس Cardiology، Radiology، Pediatrics، General Medicine، Orthopedics، Laboratory، Pharmacy وغیرہ موجود ہیں۔' },
+          { q: 'کیا لیب ٹیسٹ کروائے جا سکتے ہیں؟', a: 'جی ہاں، ہماری لیبارٹری میں مختلف ٹیسٹ تیز تر رسپانس کے ساتھ دستیاب ہیں۔' },
+          { q: 'ڈاکٹر سے رابطہ کیسے کروں؟', a: 'آپ اپوائنٹمنٹ فارم کے ذریعے یا ہسپتال پر کال کر کے ڈاکٹر سے رابطہ کر سکتے ہیں۔' },
+          { q: 'کیا ٹیلی ہیلتھ دستیاب ہے؟', a: 'جی ہاں، ہم آن لائن بُکنگ اور ٹیلی ہیلتھ کنسلٹیشن فراہم کرتے ہیں۔' },
+          { q: 'ہسپتال کہاں واقع ہے؟', a: 'ہم سچل کالونی، لاڑکانہ میں واقع ہیں۔' },
+          { q: 'آپ کون سی انشورنس قبول کرتے ہیں؟', a: 'تازہ معلومات کے لیے براہ کرم ریسپشن سے رابطہ کریں۔' },
+          { q: 'کیا خواتین ڈاکٹرز موجود ہیں؟', a: 'جی ہاں، ہمارے پاس مختلف شعبوں میں تجربہ کار خواتین ڈاکٹرز موجود ہیں۔ اپوائنٹمنٹ بُک کرتے وقت اپنی ترجیح بتائیں۔' },
+          { q: 'کیا ہوم وزٹ دستیاب ہے؟', a: 'فی الحال ہوم وزٹ دستیاب نہیں۔ تمام علاج ہسپتال میں ہوتا ہے۔' },
+          { q: 'کنسلٹیشن فیس کیا ہے؟', a: 'فیس شعبہ اور ڈاکٹر کے لحاظ سے مختلف ہوتی ہے۔ تازہ معلومات کے لیے ریسپشن سے رابطہ کریں۔' },
+          { q: 'کیا سائٹ پر فارمیسی موجود ہے؟', a: 'جی ہاں، ہماری سائٹ پر مکمل فارمیسی دستیاب ہے۔' },
+          { q: 'کیا میں اپنی اپوائنٹمنٹ ری شیڈول کر سکتا ہوں؟', a: 'جی ہاں، آپ ریسپشن سے رابطہ کر کے یا کنفرمیشن ای میل کا جواب دے کر ری شیڈول کر سکتے ہیں۔' },
+          { q: 'کیا بچوں کے ڈاکٹر موجود ہیں؟', a: 'جی ہاں، ہمارے پاس مستند ماہر اطفال موجود ہیں۔' }
+        ]
+      };
+      // Enhanced AI-like intent matcher for health services
+      function getChatbotIntentResponse(userQ) {
+        const q = userQ.trim().toLowerCase();
+        // Symptom/intent to department mapping
+        const lang = (typeof getLang === 'function') ? getLang() : 'en';
+        const map = {
+          cardiology: {
+            en: 'You should book an appointment with our <b>Cardiology</b> department.',
+            ur: 'آپ کو ہمارے <b>Cardiology</b> شعبے میں اپوائنٹمنٹ بُک کرنی چاہیے۔'
+          },
+          pediatrics: {
+            en: 'You should consult our <b>Pediatrics</b> department for child health concerns.',
+            ur: 'بچوں کی صحت کے لیے ہمارے <b>Pediatrics</b> شعبے سے رابطہ کریں۔'
+          },
+          radiology: {
+            en: 'Our <b>Radiology</b> department can help you with imaging and scans.',
+            ur: 'امِیجنگ اور اسکان کے لیے ہمارا <b>Radiology</b> شعبہ دستیاب ہے۔'
+          },
+          general: {
+            en: 'You may book with <b>General Medicine</b> for these symptoms.',
+            ur: 'ان علامات کے لیے آپ <b>General Medicine</b> میں بُک کر سکتے ہیں۔'
+          },
+          ortho: {
+            en: 'Our <b>Orthopedics</b> department can assist with bone and joint issues.',
+            ur: 'ہڈیوں اور جوڑوں کے مسائل کے لیے <b>Orthopedics</b> شعبہ دستیاب ہے۔'
+          },
+          lab: {
+            en: 'You can visit our <b>Laboratory</b> for diagnostic tests.',
+            ur: 'تشخیصی ٹیسٹس کے لیے ہماری <b>Laboratory</b> ملاحظہ کریں۔'
+          },
+          pharmacy: {
+            en: 'Our on-site <b>Pharmacy</b> is available for your medication needs.',
+            ur: 'ادویات کے لیے ہماری <b>Pharmacy</b> موجود ہے۔'
+          },
+          emergency: {
+            en: 'Please visit our <b>Emergency Care</b> for urgent medical attention. We are open 24/7.',
+            ur: 'فوری طبی امداد کے لیے <b>Emergency Care</b> تشریف لائیں۔ ہم 24/7 کھلے ہیں۔'
+          }
+        };
+        if (q.includes('chest pain') || q.includes('heart') || q.includes('palpitation')) return map.cardiology[lang];
+        if (q.includes('child') || q.includes('baby') || q.includes('pediatrician') || q.includes('kids')) return map.pediatrics[lang];
+        if (q.includes('x-ray') || q.includes('ct scan') || q.includes('mri') || q.includes('radiology')) return map.radiology[lang];
+        if (q.includes('fever') || q.includes('cough') || q.includes('flu') || q.includes('general checkup') || q.includes('check up') || q.includes('doctor')) return map.general[lang];
+        if (q.includes('bone') || q.includes('fracture') || q.includes('orthopedic') || q.includes('joint')) return map.ortho[lang];
+        if (q.includes('lab test') || q.includes('blood test') || q.includes('laboratory')) return map.lab[lang];
+        if (q.includes('medicine') || q.includes('pharmacy') || q.includes('prescription')) return map.pharmacy[lang];
+        if (q.includes('emergency') || q.includes('accident') || q.includes('urgent')) return map.emergency[lang];
+        return null;
+      }
+      // Simple matching function
+      function getChatbotAnswer(userQ) {
+        // First, try intent matcher
+        const intentResp = getChatbotIntentResponse(userQ);
+        if (intentResp) return intentResp;
+        // Try exact match first
+        const lang = (typeof getLang === 'function') ? getLang() : 'en';
+        const faqs = chatbotFAQs_i18n[lang] || [];
+        for (const item of faqs) {
+          if (userQ === item.q.toLowerCase()) return item.a;
+        }
+        // Try partial match
+        for (const item of faqs) {
+          if (item.q.toLowerCase().includes(userQ) || userQ.includes(item.q.toLowerCase())) return item.a;
+        }
+        // Fallback
+        return (lang === 'ur') ? 'معذرت، اس بارے میں معلومات دستیاب نہیں۔ مزید معلومات کے لیے ہم سے رابطہ کریں۔' : "Sorry, I don't have an answer for that. Please contact us for more info.";
+      }
+      
+      // --- Doctor Availability, Booking Flow, and Insurance Config ---
+      // Availability map built from the table at runtime
+      let doctorAvailability = {}; // { 'emily carter': { mon:'9am-1pm', tue:'9am-1pm', ... } }
+
+      function buildDoctorAvailability() {
+        try {
+          const table = document.querySelector('#doctor-availability table tbody');
+          if (!table) return;
+          const dayKeys = ['mon','tue','wed','thu','fri','sat'];
+          doctorAvailability = {};
+          table.querySelectorAll('tr').forEach(function(row){
+            const cells = row.querySelectorAll('td');
+            if (cells.length < 8) return;
+            const name = (cells[0].textContent || '').trim().toLowerCase().replace(/^dr\.?\s*/,'');
+            const days = {};
+            for (let i=0; i<dayKeys.length; i++) {
+              const txt = (cells[i+2].textContent || '').trim();
+              days[dayKeys[i]] = txt || '';
+            }
+            if (name) doctorAvailability[name] = days;
+          });
+        } catch {}
+      }
+
+      function answerDoctorAvailability(question) {
+        // Parse patterns like: Is Dr. Emily free Fri? availability for dr michael on tuesday
+        const q = question.toLowerCase();
+        const dayMap = { mon:'mon', monday:'mon', tue:'tue', tuesday:'tue', wed:'wed', wednesday:'wed', thu:'thu', thursday:'thu', fri:'fri', friday:'fri', sat:'sat', saturday:'sat' };
+        const dayMatch = Object.keys(dayMap).find(function(d){ return q.includes(' '+d) || q.endsWith(d) || q.startsWith(d); });
+        // Extract doctor name after 'dr' or known names
+        const nameMatch = q.match(/dr\.?\s+([a-z]+\s+[a-z]+)/);
+        if (!nameMatch) return null;
+        const docKey = nameMatch[1].trim();
+        const doc = doctorAvailability[docKey];
+        if (!doc) return null;
+        if (!dayMatch) {
+          // If no day specified, summarize week
+          const summary = Object.entries(doc).map(function([d,v]){ return `${d.toUpperCase()}: ${v || '—'}`; }).join(' | ');
+          return `Availability for Dr. ${docKey.replace(/\b\w/g,c=>c.toUpperCase())}: ${summary}`;
+        }
+        const dayKey = dayMap[dayMatch];
+        const slot = doc[dayKey];
+        if (slot) return `Yes, Dr. ${docKey.replace(/\b\w/g,c=>c.toUpperCase())} is available on ${dayKey.toUpperCase()} (${slot}).`;
+        return `Dr. ${docKey.replace(/\b\w/g,c=>c.toUpperCase())} does not have hours on ${dayKey.toUpperCase()}.`;
+      }
+
+      // Appointment booking flow (step-by-step with simple validation)
+      let chatBooking = { step: null, data: {} };
+      function startChatBooking() {
+        chatBooking = { step: 'fullName', data: {} };
+        const lang = (typeof getLang === 'function') ? getLang() : 'en';
+        return i18n[lang].booking_start;
+      }
+      function isValidEmail(v){ return /^\S+@\S+\.\S+$/.test(v); }
+      function isValidPhone(v){ return /[0-9]{6,}/.test(v.replace(/[^0-9]/g,'')); }
+      function isValidDate(v){ return /^\d{4}-\d{2}-\d{2}$/.test(v); }
+      function isValidDepartment(v){ return /(cardiology|radiology|pediatrics|general medicine|orthopedics|laboratory|pharmacy)/i.test(v); }
+      function handleChatBooking(userMsg) {
+        const lang = (typeof getLang === 'function') ? getLang() : 'en';
+        const m = userMsg.trim();
+        if (chatBooking.step === 'fullName') {
+          if (m.length < 3) return i18n[lang].invalid_name;
+          chatBooking.data.fullName = m; chatBooking.step = 'email';
+          return i18n[lang].ask_email;
+        }
+        if (chatBooking.step === 'email') {
+          if (!isValidEmail(m)) return i18n[lang].invalid_email;
+          chatBooking.data.email = m; chatBooking.step = 'phone';
+          return i18n[lang].ask_phone;
+        }
+        if (chatBooking.step === 'phone') {
+          if (!isValidPhone(m)) return i18n[lang].invalid_phone;
+          chatBooking.data.phone = m; chatBooking.step = 'date';
+          return i18n[lang].ask_date;
+        }
+        if (chatBooking.step === 'date') {
+          if (!isValidDate(m)) return i18n[lang].invalid_date;
+          chatBooking.data.date = m; chatBooking.step = 'department';
+          return i18n[lang].ask_dept;
+        }
+        if (chatBooking.step === 'department') {
+          if (!isValidDepartment(m)) return i18n[lang].invalid_dept;
+          chatBooking.data.department = m; chatBooking.step = 'message';
+          return i18n[lang].ask_msg;
+        }
+        if (chatBooking.step === 'message') {
+          chatBooking.data.message = (m.toLowerCase() === 'no') ? '' : m;
+          // Save
+          let list = [];
+          try { list = JSON.parse(localStorage.getItem('appointments') || '[]'); } catch { list = []; }
+          list.push(chatBooking.data);
+          localStorage.setItem('appointments', JSON.stringify(list));
+          // Also attach to current user's records if available
+          try {
+            const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            if (user && user.email) {
+              const all = JSON.parse(localStorage.getItem('medicalRecords') || '{}');
+              const rec = all[user.email] || { appointments: [], labResults: [], prescriptions: [] };
+              rec.appointments.push(chatBooking.data);
+              all[user.email] = rec;
+              localStorage.setItem('medicalRecords', JSON.stringify(all));
+            }
+          } catch {}
+          chatBooking = { step: null, data: {} };
+          return i18n[lang].saved;
+        }
+        return null;
+      }
+
+      // Insurance / fee config
+      const insuranceFeeConfig = {
+        insurance: 'Please contact our reception for the latest accepted insurance plans. Coverage can vary by provider.',
+        fee: 'Consultation fees vary by department and doctor. Please call reception for up-to-date fee details.'
+      };
+
+      // --- Rich cards helpers ---
+      function addBotHTML(html) {
+        const messages = document.getElementById('chatbotMessages');
+        if (messages) {
+          messages.innerHTML += `<div class='mb-2'><span class='badge bg-secondary me-1'><i class='bi bi-robot'></i></span> ${html}</div>`;
+          messages.scrollTop = messages.scrollHeight;
+        }
+      }
+
+      function renderDoctorCards(lang) {
+        const t = {
+          en: { title: 'Our Doctors', book: 'View', cardiologist: 'Cardiologist', radiologist: 'Radiologist' },
+          ur: { title: 'ہمارے ڈاکٹر', book: 'دیکھیں', cardiologist: 'Cardiologist', radiologist: 'Radiologist' }
+        }[lang || 'en'];
+        return `
+          <div class="card border-0 shadow-sm" style="max-width: 100%;">
+            <div class="card-body p-2">
+              <div class="small fw-bold mb-2">${t.title}</div>
+              <div class="d-flex gap-2 flex-wrap">
+                <div class="card" style="width: 150px;">
+                  <img src="img/pexels-rdne-6129112.jpg" class="card-img-top" alt="Dr Emily" style="height:80px;object-fit:cover;">
+                  <div class="card-body p-2">
+                    <div class="fw-semibold small">Dr. Emily</div>
+                    <div class="text-secondary small">${t.cardiologist}</div>
+                    <a href="doctor-details.html?id=emily-carter" class="btn btn-primary btn-sm w-100 mt-1">${t.book}</a>
+                  </div>
+                </div>
+                <div class="card" style="width: 150px;">
+                  <img src="img/pexels-tima-miroshnichenko-8376142.jpg" class="card-img-top" alt="Dr Michael" style="height:80px;object-fit:cover;">
+                  <div class="card-body p-2">
+                    <div class="fw-semibold small">Dr. Michael</div>
+                    <div class="text-secondary small">${t.radiologist}</div>
+                    <a href="doctor-details.html?id=michael-lee" class="btn btn-primary btn-sm w-100 mt-1">${t.book}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>`;
+      }
+
+      function renderContactCard(lang) {
+        const t = {
+          en: { call: 'Call', map: 'Open Map', contact: 'Contact Options' },
+          ur: { call: 'کال کریں', map: 'نقشہ کھولیں', contact: 'رابطہ کے آپشنز' }
+        }[lang || 'en'];
+        return `
+          <div class="card border-0 shadow-sm" style="max-width: 100%;">
+            <div class="card-body p-2">
+              <div class="small fw-bold mb-2">${t.contact}</div>
+              <div class="d-flex flex-wrap gap-2">
+                <a href="tel:+923194814055" class="btn btn-outline-primary btn-sm"><i class="bi bi-telephone"></i> ${t.call} Hospital</a>
+                <a href="tel:115" class="btn btn-outline-danger btn-sm"><i class="bi bi-exclamation-triangle"></i> ${t.call} 115</a>
+                <a href="https://www.google.com/maps?q=hospital" target="_blank" class="btn btn-outline-secondary btn-sm"><i class="bi bi-geo-alt"></i> ${t.map}</a>
+              </div>
+            </div>
+          </div>`;
+      }
+      // Chatbot widget logic
+      document.addEventListener('DOMContentLoaded', function() {
+        const openBtn = document.getElementById('openChatbotBtn');
+        const panel = document.getElementById('chatbotPanel');
+        const closeBtn = document.getElementById('closeChatbotBtn');
+        const form = document.getElementById('chatbotForm');
+        const input = document.getElementById('chatbotInput');
+        const messages = document.getElementById('chatbotMessages');
+        const langSelect = document.getElementById('chatbotLang');
+
+        // --- Language support ---
+        const i18n = {
+          en: {
+            disclaimer: "Disclaimer: This chatbot does not provide medical advice, diagnosis, or treatment. For emergencies, call the numbers provided or visit the hospital immediately.",
+            ask: "Ask a health question!",
+            booking_start: "Let’s book your appointment. What is your full name?",
+            ask_email: "Your email address?",
+            ask_phone: "Your phone number?",
+            ask_date: "Preferred date (YYYY-MM-DD)?",
+            ask_dept: "Which department? (Cardiology, Radiology, Pediatrics, General Medicine, Orthopedics, Laboratory, Pharmacy)",
+            ask_msg: "Any message/symptoms? (optional, type \"no\" to skip)",
+            saved: "Your appointment request has been saved. We will contact you shortly.",
+            invalid_name: "Please enter your full name.",
+            invalid_email: "Please enter a valid email address (e.g., name@example.com).",
+            invalid_phone: "Please enter a valid phone number.",
+            invalid_date: "Please use format YYYY-MM-DD.",
+            invalid_dept: "Please choose a valid department (e.g., Cardiology)."
+          },
+          ur: {
+            disclaimer: "Disclaimer: یہ چیٹ بوٹ طبی مشورہ، تشخیص یا علاج فراہم نہیں کرتا۔ ایمرجنسی کی صورت میں فوراً دیے گئے نمبرز پر رابطہ کریں یا اسپتال جائیں۔",
+            ask: "اپنا سوال لکھیں!",
+            booking_start: "چلیں آپ کی اپوائنٹمنٹ بُک کرتے ہیں۔ آپ کا مکمل نام کیا ہے؟",
+            ask_email: "آپ کا ای میل ایڈریس؟",
+            ask_phone: "آپ کا فون نمبر؟",
+            ask_date: "پسندیدہ تاریخ (YYYY-MM-DD)؟",
+            ask_dept: "کون سا شعبہ؟ (Cardiology, Radiology, Pediatrics, General Medicine, Orthopedics, Laboratory, Pharmacy)",
+            ask_msg: "کوئی پیغام/علامات؟ (اختیاری، اسکپ کرنے کیلئے \"no\" لکھیں)",
+            saved: "آپ کی اپوائنٹمنٹ محفوظ کر لی گئی ہے۔ ہم جلد آپ سے رابطہ کریں گے۔",
+            invalid_name: "براہ کرم مکمل نام درج کریں۔",
+            invalid_email: "براہ کرم درست ای میل درج کریں (مثلاً name@example.com)",
+            invalid_phone: "براہ کرم درست فون نمبر درج کریں۔",
+            invalid_date: "براہ کرم YYYY-MM-DD فارمیٹ استعمال کریں۔",
+            invalid_dept: "براہ کرم درست شعبہ منتخب کریں (مثلاً Cardiology)۔"
+          }
+        };
+        function getLang(){ return (localStorage.getItem('chatbotLang') || 'en'); }
+        function setLang(l){ localStorage.setItem('chatbotLang', l); }
+        // Initialize language selection
+        try { if (langSelect) langSelect.value = getLang(); } catch {}
+        if (langSelect) langSelect.addEventListener('change', function(){ setLang(this.value); });
+
+        // --- Suggested Questions (Quick Replies) ---
+        const chatbotSuggestedQuestions = [
+          'What are your hospital timings?',
+          'How do I book an appointment?',
+          'Do you offer emergency services?',
+          'Where is the hospital located?',
+          'Can I get lab tests done?',
+          'Is telehealth available?'
+        ];
+
+        function renderChatbotSuggestions() {
+          const suggDiv = document.getElementById('chatbotSuggestions');
+          if (!suggDiv) return;
+          suggDiv.innerHTML = chatbotSuggestedQuestions.map(function(q){
+            return `<button type="button" class="btn btn-outline-secondary btn-sm chatbot-suggestion">${q}</button>`;
+          }).join('');
+          suggDiv.querySelectorAll('.chatbot-suggestion').forEach(function(btn){
+            btn.addEventListener('click', function(){
+              if (!input || !form) return;
+              input.value = this.textContent;
+              form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+            });
+          });
+        }
+
+        // Open/Close chatbot (toggle)
+        if (openBtn) openBtn.addEventListener('click', function() {
+          if (panel.style.display === 'block') {
+            panel.style.display = 'none';
+          } else {
+          panel.style.display = 'block';
+          input.focus();
+            renderChatbotSuggestions();
+            // Apply current language labels
+            try {
+              const lang = getLang();
+              const disc = document.getElementById('chatbotDisclaimer');
+              if (disc) disc.innerHTML = `<i class='bi bi-exclamation-triangle me-1'></i><b>${i18n[lang].disclaimer.split(':')[0]}:</b> ${i18n[lang].disclaimer.split(':').slice(1).join(':').trim()}`;
+            } catch {}
+          }
+        });
+        // Close chatbot
+        if (closeBtn) closeBtn.addEventListener('click', function() {
+          panel.style.display = 'none';
+        });
+        // Submit question
+        if (form) form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const userMsg = input.value.trim();
+          if (!userMsg) return;
+          // Add user message
+          messages.innerHTML += `<div class='mb-2'><span class='badge bg-primary me-1'><i class='bi bi-person'></i></span> <span>${userMsg}</span></div>`;
+          // Booking flow check
+          let answered = false;
+          if (!answered && (/(^|\b)(book|appointment|make appointment)(\b|$)/i.test(userMsg) || (typeof chatBooking === 'object' && chatBooking.step))) {
+            if (!chatBooking.step) {
+              const start = startChatBooking();
+              messages.innerHTML += `<div class='mb-2'><span class='badge bg-secondary me-1'><i class='bi bi-robot'></i></span> <span>${start}</span></div>`;
+            } else {
+              const resp = handleChatBooking(userMsg);
+              if (resp) messages.innerHTML += `<div class='mb-2'><span class='badge bg-secondary me-1'><i class='bi bi-robot'></i></span> <span>${resp}</span></div>`;
+            }
+            answered = true;
+          }
+
+          // Doctor availability
+          if (!answered) {
+            const availAns = answerDoctorAvailability(userMsg);
+            if (availAns) {
+              messages.innerHTML += `<div class='mb-2'><span class='badge bg-secondary me-1'><i class='bi bi-robot'></i></span> <span>${availAns}</span></div>`;
+              answered = true;
+              // Also suggest doctor cards and contact options
+              const lang = (typeof getLang === 'function') ? getLang() : 'en';
+              const cards = renderDoctorCards(lang);
+              const contact = renderContactCard(lang);
+              messages.innerHTML += `<div class='mb-2'>${cards}</div>`;
+              messages.innerHTML += `<div class='mb-2'>${contact}</div>`;
+            }
+          }
+
+          // Insurance/fees shortcuts
+          if (!answered) {
+            const low = userMsg.toLowerCase();
+            if (low.includes('insurance')) {
+              messages.innerHTML += `<div class='mb-2'><span class='badge bg-secondary me-1'><i class='bi bi-robot'></i></span> <span>${insuranceFeeConfig.insurance}</span></div>`;
+              answered = true;
+              const lang = (typeof getLang === 'function') ? getLang() : 'en';
+              messages.innerHTML += `<div class='mb-2'>${renderContactCard(lang)}</div>`;
+            } else if (low.includes('fee') || low.includes('fees') || low.includes('charges') || low.includes('consultation')) {
+              messages.innerHTML += `<div class='mb-2'><span class='badge bg-secondary me-1'><i class='bi bi-robot'></i></span> <span>${insuranceFeeConfig.fee}</span></div>`;
+              answered = true;
+              const lang = (typeof getLang === 'function') ? getLang() : 'en';
+              messages.innerHTML += `<div class='mb-2'>${renderContactCard(lang)}</div>`;
+            }
+          }
+
+          // Default answer
+          if (!answered) {
+          const answer = getChatbotAnswer(userMsg);
+          setTimeout(() => {
+            messages.innerHTML += `<div class='mb-2'><span class='badge bg-secondary me-1'><i class='bi bi-robot'></i></span> <span>${answer}</span></div>`;
+            messages.scrollTop = messages.scrollHeight;
+          }, 400);
+          }
+          input.value = '';
+          messages.scrollTop = messages.scrollHeight;
+        });
+
+        // Initial render of suggestions
+        renderChatbotSuggestions();
+      });
+    </script>
+
+    <!-- Wikipedia search for Health Blog section -->
+    <script>
+      // Wikipedia search for Health Blog section
+      document.addEventListener('DOMContentLoaded', function() {
+        const wikiForm = document.getElementById('wikiSearchForm');
+        const wikiInput = document.getElementById('wikiSearchInput');
+        const wikiResults = document.getElementById('wikiResults');
+        if (wikiForm && wikiInput && wikiResults) {
+          wikiForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const query = wikiInput.value.trim();
+            if (!query) return;
+            wikiResults.innerHTML = '<div class="text-secondary">Searching Wikipedia...</div>';
+            fetch(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&utf8=&format=json&origin=*`)
+              .then(res => res.json())
+              .then(data => {
+                if (data.query && data.query.search && data.query.search.length) {
+                  wikiResults.innerHTML = data.query.search.slice(0, 5).map(item =>
+                    `<div class='mb-3'>
+                      <a href='https://en.wikipedia.org/?curid=${item.pageid}' target='_blank' class='fw-bold'>${item.title}</a>
+                      <div class='small text-muted'>${item.snippet.replace(/(<([^>]+)>)/gi, '')}...</div>
+                    </div>`
+                  ).join('');
+                } else {
+                  wikiResults.innerHTML = '<div class="text-danger">No results found on Wikipedia.</div>';
+                }
+              })
+              .catch(() => {
+                wikiResults.innerHTML = '<div class="text-danger">Error fetching data from Wikipedia.</div>';
+              });
+          });
+        }
+      });
+    </script>
+
+    <script>
+      // 
+      // Emergency Button logic
+      document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.getElementById('emergencyBtn');
+        if (btn) {
+          btn.addEventListener('click', function() {
+            const modal = document.getElementById('emergencyModal');
+            if (modal) new bootstrap.Modal(modal).show();
+          });
+        }
+      });
+    </script>
+
+  
+<script>
+  // Multi-language suggested questions
+  const suggestions = {
+    en: [
+      "What is diabetes?",
+      "Tips for healthy eating",
+      "Exercise for heart health"
+    ],
+    ur: [
+      "شوگر کیا ہے؟",
+      "صحت مند کھانے کے طریقے",
+      "دل کی صحت کے لیے ورزش"
+    ],
+    sd: [
+      "ذیابيطس ڇا آهي؟",
+      "صحت مند کاڌو",
+      "دل جي صحتي لاءِ مشق"
+    ]
+  };
+
+  // Function to update suggestion buttons dynamically
+  function updateSuggestions(lang) {
+    const container = document.getElementById("suggestions");
+    if (!container) return;
+    container.innerHTML = "";
+    if (!suggestions[lang]) lang = "en"; // fallback to English
+    suggestions[lang].forEach(q => {
+      let btn = document.createElement("button");
+      btn.className = "btn btn-outline-primary m-1";
+      btn.textContent = q;
+      btn.onclick = () => sendMessage(q);
+      container.appendChild(btn);
+    });
+  }
+
+  // Example language switch function (hook this to your language switcher)
+  function switchLanguage(lang) {
+    currentLanguage = lang;
+    updateSuggestions(lang);
+    // You can also update chatbot greeting etc here if needed
+  }
+
+  // Initialize with default language
+  let currentLanguage = "en";
+  document.addEventListener("DOMContentLoaded", () => {
+    updateSuggestions(currentLanguage);
+  });
+</script>
+
+</body>
+  </html>
